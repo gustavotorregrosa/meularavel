@@ -13,6 +13,8 @@
           <th scope="col">ID</th>
           <th scope="col">Nome</th>
           <th scope="col">Email</th>
+          <th scope="col">Papel</th>
+          <th scope="col">Ativo</th>
           <th scope="col">Criado</th>
           <th scope="col">Atualizado</th>
         </tr>
@@ -23,6 +25,8 @@
               <td>{{ $usuario->id }}</td>
               <td>{{ $usuario->name }}</td>
               <td>{{ $usuario->email }}</td>
+              <td>{{ $usuario->role->name }}</td>
+              <td>{{ $usuario->is_active ? 'Ativo' : 'Desativado' }}</td>
               <td>{{ $usuario->created_at->diffForHumans()}}</td>
               <td>{{ $usuario->updated_at->diffForHumans() }}</td>
             </tr>
