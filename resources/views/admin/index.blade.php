@@ -3,7 +3,7 @@
 @section('titulo', 'CodeHacking')
 
 @section('conteudo')
-    
-    blablabla
-    
+
+    home admin
+
 @endsection

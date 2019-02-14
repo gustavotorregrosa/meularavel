@@ -13,7 +13,13 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        return view('admin.users');
+
+
+      $dados = [
+        'usuarios' => \App\User::all()
+      ];
+
+        return view('admin.users', $dados);
     }
 
     /**
