@@ -5,6 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('custom-assets/admin/vendor/bootstrap/css/bootstrap.min.css') }}">
     <link href="{{ asset('custom-assets/admin/vendor/fonts/circular-std/style.css') }}" rel="stylesheet">
@@ -40,6 +41,8 @@
         <div class="dashboard-wrapper">
         <br>
             @yield('conteudo')
+            @component('admin.erros')
+            @endcomponent
         </div>
     </div>
 
