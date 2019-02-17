@@ -35,7 +35,7 @@
 
         <div class="form-check">
             <label>Choose a profile picture:</label>
-            <input type="file" id="avatar" name="avatar">
+            <input type="file" id="foto" name="foto">
         </div>
 
 

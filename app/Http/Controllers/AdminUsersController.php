@@ -45,7 +45,29 @@ class AdminUsersController extends Controller
      */
     public function store(UsersRequest $request)
     {
-        return $request->all();
+        $role_id = $request->input('papel');
+        $is_active = $request->input('status', '0');
+        $nome = $request->input('nome');
+        $email = $request->input('email');
+        $password = \bcrypt($request->input('password'));
+        $foto = $request->file('foto');
+        $extensao = $foto->getClientOriginalExtension();
+        $novoNome = \md5(time().$foto->getClientOriginalName());
+        $novoNome .= ".".$extensao;
+        $foto->move('storage/imagens/usuarios', $novoNome);
+        $objFoto = \App\Photo::create([
+            'path' => $novoNome
+        ]);
+        $id_foto = $objFoto->id;
+        $usuario = \App\User::create([
+            'role_id' => $role_id,
+            'photo_id' => $id_foto,
+            'is_active' => $is_active,
+            'name' => $nome,
+            'email' => $email,
+            'password' => $password
+        ]);
+
     }
 
     /**

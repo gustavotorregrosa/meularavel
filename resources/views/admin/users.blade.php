@@ -11,6 +11,7 @@
       <thead>
         <tr>
           <th scope="col">ID</th>
+          <th scope="col">Foto</th>
           <th scope="col">Nome</th>
           <th scope="col">Email</th>
           <th scope="col">Papel</th>
@@ -24,6 +25,15 @@
             <tr>
               <td>{{ $usuario->id }}</td>
               <td>{{ $usuario->name }}</td>
+              <td><img class="img-fluid img-thumbnail"
+                @if($usuario->photo)
+                  src="{{ url(Storage::url('imagens/usuarios/'.$usuario->photo->path)) }}"
+                  @else
+                  alt="sem foto"
+                @endif
+                >
+              
+              </td>
               <td>{{ $usuario->email }}</td>
               <td>{{ $usuario->role->name }}</td>
               <td>{{ $usuario->is_active ? 'Ativo' : 'Desativado' }}</td>
