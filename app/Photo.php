@@ -10,4 +10,9 @@ class Photo extends Model
     protected $fillable = [
         'path'
     ];
+    protected $upload = "/imagens/usuarios/";
+
+    public function getPathAttribute($path){
+        return $this->upload.$path;
+    }
 }

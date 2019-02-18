@@ -89,7 +89,11 @@ class AdminUsersController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.users-edit');
+        $user = \App\User::with(['role', 'photo'])->where('id', $id)->first();
+        $dados = [
+            'usuario' => $user
+        ];
+        return view('admin.users-edit', $dados);
     }
 
     /**
@@ -101,7 +105,8 @@ class AdminUsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request);
+        
     }
 
     /**
