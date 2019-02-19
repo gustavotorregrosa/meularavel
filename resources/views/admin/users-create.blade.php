@@ -20,7 +20,6 @@
         <div class="form-check">
             <label>Password</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Senha">
- 
         </div>
         <div class="form-check">
             <label>Papel</label>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UsersRequest;
+use App\Http\Requests\UsersERequest;
 
 class AdminUsersController extends Controller
 {
@@ -68,6 +69,8 @@ class AdminUsersController extends Controller
             'password' => $password
         ]);
 
+        return redirect('/admin/users');
+
     }
 
     /**
@@ -91,7 +94,8 @@ class AdminUsersController extends Controller
     {
         $user = \App\User::with(['role', 'photo'])->where('id', $id)->first();
         $dados = [
-            'usuario' => $user
+            'usuario' => $user,
+            'papeis' => \App\Role::all()
         ];
         return view('admin.users-edit', $dados);
     }
@@ -103,10 +107,33 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UsersERequest $request, $id)
     {
-        dd($request);
+        $usuario = \App\User::with('photo')->where('id', $id)->first();
         
+        $usuario->role_id = $request->input('papel');
+        $usuario->is_active = $request->input('status', '0');
+        $usuario->name = $request->input('nome');
+        $usuario->email = $request->input('email');
+        $usuario->save();
+
+        if($fotoNova = $request->file('foto')){
+                $id_foto = $usuario->photo_id;
+                $nomeFotoAntiga = $usuario->photo->path;
+                \Storage::delete('public/'.$nomeFotoAntiga);
+                $extensao = $fotoNova->getClientOriginalExtension();
+                $novoNome = \md5(time().$fotoNova->getClientOriginalName());
+                $novoNome .= ".".$extensao;
+                $fotoNova->move('storage/imagens/usuarios', $novoNome);
+                $usuario->photo->path = $novoNome;
+                $usuario->photo->save();
+                
+
+        }
+        return redirect('/admin/users');
+
+
+    
     }
 
     /**
