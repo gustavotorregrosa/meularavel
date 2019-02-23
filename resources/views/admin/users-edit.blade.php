@@ -65,5 +65,12 @@
         <br>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    
+
+    <br><br>
+
+    <form method="post" action="{{ url('/admin/users/del-foto/'.$usuario->id) }}"> 
+        @method('delete')
+        @csrf
+        <button type="submit" class="btn btn-danger">Deleta foto</button>
+    </form>
 @endsection

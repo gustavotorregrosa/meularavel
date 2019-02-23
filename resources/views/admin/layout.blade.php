@@ -41,6 +41,8 @@
         <div class="dashboard-wrapper">
         <br>
             @yield('conteudo')
+            @component('admin.mensagens')
+            @endcomponent
             @component('admin.erros')
             @endcomponent
         </div>
@@ -55,6 +57,8 @@
     <script src="{{ asset('custom-assets/admin/vendor/slimscroll/jquery.slimscroll.js') }}"></script>
     <!-- main js -->
     <script src="{{ asset('custom-assets/admin/libs/js/main-js.js') }}"></script>
+
+    <script src="{{ asset('custom-assets/admin/libs/js/principal.js') }}"></script>
 
 </body>
 

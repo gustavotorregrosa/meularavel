@@ -31,6 +31,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Route::group(['middleware' => 'Admin'], function(){
     Route::resource('admin/users', 'AdminUsersController');
+    Route::delete('admin/users/del-foto/{id}', 'AdminUsersController@deletaFoto');
 // });
 
 

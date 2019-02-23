@@ -69,6 +69,7 @@ class AdminUsersController extends Controller
             'password' => $password
         ]);
 
+        \Session::flash('msg-sucesso', 'Usuario criado');
         return redirect('/admin/users');
 
     }
@@ -119,16 +120,13 @@ class AdminUsersController extends Controller
 
         if($fotoNova = $request->file('foto')){
                 $id_foto = $usuario->photo_id;
-                $nomeFotoAntiga = $usuario->photo->path;
-                \Storage::delete('public/'.$nomeFotoAntiga);
+                @unlink(public_path()."/storage".$usuario->photo->path);
                 $extensao = $fotoNova->getClientOriginalExtension();
                 $novoNome = \md5(time().$fotoNova->getClientOriginalName());
                 $novoNome .= ".".$extensao;
                 $fotoNova->move('storage/imagens/usuarios', $novoNome);
                 $usuario->photo->path = $novoNome;
-                $usuario->photo->save();
-                
-
+                $usuario->photo->save();    
         }
         return redirect('/admin/users');
 
@@ -144,6 +142,16 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $usuario = \App\User::with('photo')->where('id', $id)->first();
+        @unlink(public_path()."/storage".$usuario->photo->path);
+        $usuario->delete();
+        return redirect('/admin/users');
+
+    }
+
+    public function deletaFoto($id){
+        $usuario = \App\User::with('photo')->where('id', $id)->first();
+        @unlink(public_path()."/storage".$usuario->photo->path);
+        return redirect('/admin/users');
     }
 }
