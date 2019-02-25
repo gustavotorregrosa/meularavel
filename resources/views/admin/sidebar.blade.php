@@ -17,8 +17,18 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ url('/admin/users/create') }}">Criar</a>
                                         </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"></i>Posts <span class="badge badge-success">6</span></a>
+                                <div id="submenu-2" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ url('/admin/users/edit') }}">Editar</a>
+                                            <a class="nav-link" href="{{ url('/admin/posts') }}">Painel</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ url('/admin/posts/create') }}">Criar</a>
                                         </li>
                                     </ul>
                                 </div>

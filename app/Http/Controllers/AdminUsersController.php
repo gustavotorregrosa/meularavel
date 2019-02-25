@@ -15,8 +15,6 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-
-
       $dados = [
         'usuarios' => \App\User::all()
       ];
