@@ -6,3 +6,9 @@ $(".am-del-usuario").on("click", function(){
     $("#mdl-deleta-usuario").modal("show");
 
 });
+
+
+$("#btn-am-cria-perfil").on("click", function(){
+    $("#mdl-cria-perfil").modal("show");
+
+});

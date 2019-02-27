@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Role as Perfil;
 
 class PerfilController extends Controller
 {
@@ -13,7 +14,13 @@ class PerfilController extends Controller
      */
     public function index()
     {
-        return view('admin.perfis');
+
+        $perfis = Perfil::all();
+
+        $dados = [
+            'perfis' => $perfis
+        ];
+        return view('admin.perfis', $dados);
     }
 
     /**
@@ -34,7 +41,12 @@ class PerfilController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nome = $request->input('nome-perfil');
+        Perfil::create([
+            'name' => $nome
+        ]);
+        \Session::flash('msg-sucesso', 'perfil criado');
+        return redirect('/admin/perfil');
     }
 
     /**
