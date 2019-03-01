@@ -12,3 +12,8 @@ $("#btn-am-cria-perfil").on("click", function(){
     $("#mdl-cria-perfil").modal("show");
 
 });
+
+
+$(".btn-am-edita-perfil").on("click", function(){
+    let baseUrl = $("#frm-edita-perfil #inp-base-url").val();
+});
