@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Role as Perfil;
 
-class PerfilController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +13,7 @@ class PerfilController extends Controller
      */
     public function index()
     {
-
-        $perfis = Perfil::all();
-
-        $dados = [
-            'perfis' => $perfis
-        ];
-        return view('admin.perfis', $dados);
+        return view('admin.posts');
     }
 
     /**
@@ -30,7 +23,7 @@ class PerfilController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts-create');
     }
 
     /**
@@ -41,12 +34,8 @@ class PerfilController extends Controller
      */
     public function store(Request $request)
     {
-        $nome = $request->input('nome-perfil');
-        Perfil::create([
-            'name' => $nome
-        ]);
-        \Session::flash('msg-sucesso', 'perfil criado');
-        return redirect('/admin/perfil');
+        $this->middleware('auth');
+        dd("chegou aqui");
     }
 
     /**
@@ -57,7 +46,7 @@ class PerfilController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -66,9 +55,16 @@ class PerfilController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function editar()
+    {
+        return view('admin.posts-edit');
+    }
+
+
     public function edit($id)
     {
-        //
+        return view('admin.posts-edit');
     }
 
     /**
@@ -80,11 +76,7 @@ class PerfilController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $perfil = Perfil::find($id);
-        $perfil->name = $request->input('nome-perfil');
-        $perfil->save();
-        \Session::flash('msg-sucesso', 'perfil alterado');
-        return redirect('/admin/perfil');
+        //
     }
 
     /**
@@ -95,9 +87,6 @@ class PerfilController extends Controller
      */
     public function destroy($id)
     {
-        $perfil = Perfil::find($id);
-        $perfil->delete();
-        \Session::flash('msg-sucesso', 'perfil deletado');
-        return redirect('/admin/perfil');
+        //
     }
 }

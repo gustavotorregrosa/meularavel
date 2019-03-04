@@ -24,15 +24,42 @@
                     <tr>
                         <td class="nome-perfil">{{$perfil->name}}</td>
                         <td>
-                            <button id="{{$perfil->id}}" class="btn btn-primary btn-sm btn-am-edita-perfil">Editar</button>
+                            <button data-id="{{$perfil->id}}" class="btn btn-primary btn-sm btn-am-edita-perfil">Editar</button>
                                 &nbsp;&nbsp;
-                            <button class="btn btn-danger btn-sm">Inativar</button>
+                            <button data-id="{{$perfil->id}}" class="btn btn-danger btn-sm btn-am-inativa-perfil">Inativar</button>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     @endif
+
+
+    <div id="mdl-inativa-perfil" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Inativa perfil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <form id="frm-inativa-perfil" method="post">
+                    @csrf
+                    @method('delete')
+                    <input id="inp-base-url" type="hidden" value="{{ url('admin/perfil') }}">
+                    <div class="modal-body">
+                        <p>Inativar o perfil <span id="spn-nome-perfil"></span>?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Inativar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
 
 

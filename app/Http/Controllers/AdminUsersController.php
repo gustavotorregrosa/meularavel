@@ -53,7 +53,7 @@ class AdminUsersController extends Controller
         $extensao = $foto->getClientOriginalExtension();
         $novoNome = \md5(time().$foto->getClientOriginalName());
         $novoNome .= ".".$extensao;
-        $foto->move('storage/imagens/usuarios', $novoNome);
+        $foto->move('storage/imagens', $novoNome);
         $objFoto = \App\Photo::create([
             'path' => $novoNome
         ]);
@@ -122,7 +122,7 @@ class AdminUsersController extends Controller
                 $extensao = $fotoNova->getClientOriginalExtension();
                 $novoNome = \md5(time().$fotoNova->getClientOriginalName());
                 $novoNome .= ".".$extensao;
-                $fotoNova->move('storage/imagens/usuarios', $novoNome);
+                $fotoNova->move('storage/imagens', $novoNome);
                 $usuario->photo->path = $novoNome;
                 $usuario->photo->save();    
         }

@@ -28,10 +28,13 @@ Route::get('admin', function(){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('admin/posts/editar', 'PostController@editar');
 
 // Route::group(['middleware' => 'Admin'], function(){
     Route::resource('admin/perfil', 'PerfilController');
     Route::resource('admin/users', 'AdminUsersController');
+    Route::resource('admin/posts', 'PostController');
+    
     Route::delete('admin/users/del-foto/{id}', 'AdminUsersController@deletaFoto');
 // });
 
