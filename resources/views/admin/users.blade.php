@@ -7,6 +7,9 @@
 @section('conteudo')
     <h2>usuarios</h2>
     <br>
+
+
+
     @if($usuarios)
     <table class="table table-striped">
       <thead>
@@ -36,7 +39,7 @@
                 >
               </td>
               <td>{{ $usuario->email }}</td>
-              <td>{{ $usuario->role->name }}</td>
+              <td>{{ $usuario->role ? $usuario->role->name : "sem perfil" }}</td>
               <td>{{ $usuario->is_active ? 'Ativo' : 'Desativado' }}</td>
               <td>{{ $usuario->created_at->diffForHumans()}}</td>
               <td>{{ $usuario->updated_at->diffForHumans() }}</td>

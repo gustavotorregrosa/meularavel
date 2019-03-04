@@ -98,8 +98,10 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::with('photo')->where('id', $id)->first();
+        $categorias = \App\Categoria::all();
         $dados = [
-            'post' => $post
+            'post' => $post,
+            'categorias' => $categorias
         ];
         return view('admin.posts-edit', $dados);
     }
