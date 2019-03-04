@@ -34,6 +34,7 @@ Route::get('admin/posts/editar', 'PostController@editar');
     Route::resource('admin/perfil', 'PerfilController');
     Route::resource('admin/users', 'AdminUsersController');
     Route::resource('admin/posts', 'PostController');
+    Route::resource('admin/categoria', 'CategoriaController');
     
     Route::delete('admin/users/del-foto/{id}', 'AdminUsersController@deletaFoto');
 // });

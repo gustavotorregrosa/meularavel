@@ -3,9 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PostsRequest;
+use \App\Post;
 
 class PostController extends Controller
 {
+
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +21,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('admin.posts');
+        $posts = Post::with([
+            'photo',
+            'user'            
+        ])->get();
+        $dados = [
+            'posts' => $posts
+        ];
+        return view('admin.posts', $dados);
     }
 
     /**
@@ -32,10 +47,28 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostsRequest $request)
     {
-        $this->middleware('auth');
-        dd("chegou aqui");
+        $post = new Post;
+        $post->user_id = \Auth::user()->id;
+        $post->titulo = $request->input('titulo');
+        $post->corpo = $request->input('body');
+
+        if($foto = $request->file('foto')){
+            $extensao = $foto->getClientOriginalExtension();
+            $novoNome = \md5(time().$foto->getClientOriginalName());
+            $novoNome .= ".".$extensao;
+            $foto->move('storage/imagens', $novoNome);
+            $objFoto = \App\Photo::create([
+                'path' => $novoNome
+            ]);
+            $id_foto = $objFoto->id;
+            $post->photo_id = $id_foto;
+        }
+
+        $post->save();
+        \Session::flash('msg-sucesso', 'post criado');
+        return redirect('/admin/posts');
     }
 
     /**
@@ -64,7 +97,11 @@ class PostController extends Controller
 
     public function edit($id)
     {
-        return view('admin.posts-edit');
+        $post = Post::with('photo')->where('id', $id)->first();
+        $dados = [
+            'post' => $post
+        ];
+        return view('admin.posts-edit', $dados);
     }
 
     /**
@@ -74,9 +111,28 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostsRequest $request, $id)
     {
-        //
+        $post = Post::with('photo')->where('id', $id)->first();
+        $post->titulo = $request->input('titulo');
+        $post->corpo = $request->input('body');
+        if($foto = $request->file('foto')){
+            @unlink(public_path()."/storage".$post->photo->path);
+            $extensao = $foto->getClientOriginalExtension();
+            $novoNome = \md5(time().$foto->getClientOriginalName());
+            $novoNome .= ".".$extensao;
+            $foto->move('storage/imagens', $novoNome);
+            $objFoto = \App\Photo::create([
+                'path' => $novoNome
+            ]);
+            $id_foto = $objFoto->id;
+            $post->photo_id = $id_foto;
+        }
+
+        $post->save();
+        \Session::flash('msg-sucesso', 'post alterado');
+        return redirect('/admin/posts');
+
     }
 
     /**
@@ -87,6 +143,14 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::with('photo')->where('id', $id)->first();
+        if($post->photo){
+            @unlink(public_path()."/storage".$post->photo->path);
+        }
+        $post->delete();
+        \Session::flash('msg-sucesso', 'post deletado');
+        return redirect('/admin/posts');
+
+
     }
 }

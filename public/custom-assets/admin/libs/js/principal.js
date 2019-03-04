@@ -35,3 +35,18 @@ $(".btn-am-inativa-perfil").on("click", function(){
    
 
 });
+
+$(".edita-post").on("click", function(){
+    let baseUrl =$("#base-url").val();
+    let idPost = $(this).data("id");
+    let url = baseUrl + "/" + idPost + "/edit";
+    window.location.href = url;
+});
+
+$(".btn-am-deleta-post").on("click", function(){
+    let baseUrl =$("#base-url").val();
+    let idPost = $(this).data("id");
+    let url = baseUrl + "/" + idPost;
+    $('#frm-deleta-post').attr('action', url);
+    $("#mdl-deleta-post").modal("show");
+});

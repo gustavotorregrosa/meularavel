@@ -13,10 +13,10 @@ class Post extends Model
 
 
     public function photo(){
-        return $this->belognsTo('App\Photo', 'photo_id');
+        return $this->belongsTo('App\Photo', 'photo_id');
     }
 
     public function user(){
-        return $this->belognsTo('App\User', 'user_id');
+        return $this->belongsTo('App\User', 'user_id');
     }
 }

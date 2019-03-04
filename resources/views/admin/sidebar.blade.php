@@ -43,6 +43,19 @@
                                     </ul>
                                 </div>
                             </li>
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"></i>Categorias <span class="badge badge-success">6</span></a>
+                                <div id="submenu-3" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ url('/admin/categoria') }}">Painel</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ url('/admin/categoria/create') }}">Criar</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
                          
                         </ul>
                     </div>
