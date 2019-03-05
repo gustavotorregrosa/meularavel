@@ -37,6 +37,15 @@ Route::get('admin/posts/editar', 'PostController@editar');
     Route::resource('admin/categoria', 'CategoriaController');
     
     Route::delete('admin/users/del-foto/{id}', 'AdminUsersController@deletaFoto');
+
+    Route::get('/admin/teste', function(){
+        // dd("ola mundo");
+        $categoria = \App\Categoria::with('posts')->where('id', '2')->first();
+        $meusPosts = $categoria->posts->all();
+        foreach($meusPosts as $mPost){
+            var_dump($mPost->titulo);
+        }
+    });
 // });
 
 

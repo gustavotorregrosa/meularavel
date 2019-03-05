@@ -130,6 +130,10 @@ class PostController extends Controller
             $id_foto = $objFoto->id;
             $post->photo_id = $id_foto;
         }
+        
+        if($request->input('categoria')){
+            $post->categoria_id = $request->input('categoria');
+        }
 
         $post->save();
         \Session::flash('msg-sucesso', 'post alterado');
