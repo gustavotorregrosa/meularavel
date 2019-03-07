@@ -13,7 +13,8 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        $fotos = \App\Photo::all();
+        $fotos = \App\Photo::paginate(2);
+        // $fotos = \App\Photo::all();
         $dados = [
             'fotos' => $fotos
         ];

@@ -55,6 +55,8 @@
     <script src="{{ asset('custom-assets/admin/vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <!-- slimscroll js -->
     <script src="{{ asset('custom-assets/admin/vendor/slimscroll/jquery.slimscroll.js') }}"></script>
+
+    <script src="{{ asset('custom-assets/admin/vendor/dropzone/dropzone.js') }}"></script>
     <!-- main js -->
     <script src="{{ asset('custom-assets/admin/libs/js/main-js.js') }}"></script>
 

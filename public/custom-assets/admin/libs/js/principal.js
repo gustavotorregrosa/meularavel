@@ -50,3 +50,5 @@ $(".btn-am-deleta-post").on("click", function(){
     $('#frm-deleta-post').attr('action', url);
     $("#mdl-deleta-post").modal("show");
 });
+
+

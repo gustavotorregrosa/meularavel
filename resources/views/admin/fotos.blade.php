@@ -25,4 +25,8 @@
   </tbody>
 </table>
 
+<br><br>
+
+{{$fotos->links()}}
+
 @endsection
